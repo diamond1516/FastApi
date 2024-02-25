@@ -2,4 +2,7 @@ psycopg2-binary
 sqlalchemy
 sqlalchemy-utils
 werkzeug
+bcrypt
 alembic
+fastapi
+uvicorn

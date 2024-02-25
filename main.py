@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from users import auth
 
 app = FastAPI(
-    title="Simple"
+    title="Simple", debug=True
 )
 app.include_router(auth.auth_router)
 

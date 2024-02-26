@@ -10,7 +10,7 @@ auth_router = APIRouter(
 )
 
 
-@auth_router.post("/signup", status_code=status.HTTP_201_CREATED)
+@auth_router.post("/signup", status_code=status.HTTP_201_CREATED, response_model=schemas.SignUpModel)
 async def signup(user: schemas.SignUpModel):
     db_user = Session.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
@@ -19,7 +19,7 @@ async def signup(user: schemas.SignUpModel):
         email=user.email,
         phone=user.phone,
         name=user.name,
-        password=user.password
+        password=generate_password_hash(user.password, method='pbkdf2:sha256')
 
     )
     Session.add(new_user)

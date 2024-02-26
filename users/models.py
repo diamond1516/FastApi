@@ -3,6 +3,11 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, String, Forei
 from sqlalchemy.orm import relationship
 from sqlalchemy_utils.types import ChoiceType
 from sqlalchemy.sql import func
+from sqlalchemy.orm import validates
+import re
+
+PATTERN = re.compile(
+    r"([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])")
 
 
 class BaseModel(Base):
@@ -23,6 +28,12 @@ class User(BaseModel):
     password = Column(Text, nullable=True)
     profile = relationship("Profile", back_populates="user", uselist=False)
     age = Column(Integer)
+
+    @validates("email")
+    def validate_email(self, key, email):
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            raise ValueError("Email is not valid")
+        return email
 
 
 class Profile(BaseModel):

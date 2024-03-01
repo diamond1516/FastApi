@@ -43,3 +43,8 @@ class Profile(BaseModel):
     user = relationship('User', back_populates='profile')
     avatar = Column(String(255), nullable=True)
     bio = Column(Text, nullable=True)
+
+
+class Token(BaseModel):
+    __tablename__ = 'token'
+    access_token = Column(String(100), unique=True)

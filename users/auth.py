@@ -25,3 +25,8 @@ async def signup(user: schemas.SignUpModel):
     Session.add(new_user)
     Session.commit()
     return new_user
+
+
+@auth_router.post("test/", status_code=status.HTTP_201_CREATED, response_model=schemas.Test)
+async def test(test_: schemas.SignUpModel):
+    pass

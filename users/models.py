@@ -48,3 +48,9 @@ class Profile(BaseModel):
 class Token(BaseModel):
     __tablename__ = 'token'
     access_token = Column(String(100), unique=True)
+
+
+class TestCategory(BaseModel):
+    __tablename__ = 'test_category'
+    avatar = Column(String)
+    name = Column(String)

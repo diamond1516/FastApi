@@ -1,6 +1,6 @@
-from pydantic import BaseModel, Field, validator, ValidationError, constr
+from pydantic import BaseModel, Field, validator, ValidationError
 from typing import Optional
-from fastapi import HTTPException, status
+from fastapi import HTTPException, status, UploadFile, File
 import re
 
 from users.models import PATTERN
@@ -28,3 +28,8 @@ class SignUpModel(BaseModel):
         #         'name': '<NAME>'
         #     }
         # }
+
+
+class Test(BaseModel):
+    avatar: UploadFile = Field()
+    name: Optional[str] = Field(example='Salom')

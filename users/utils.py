@@ -8,7 +8,7 @@ from fastapi import UploadFile, File
 PATH_MEDIA = Path('media')
 
 
-async def upload_file(file: UploadFile = File(...), upload_dir: Path = 'salom'):
+async def upload_file(file: UploadFile = File(...), upload_dir: Path = ''):
     try:
         PATH_MEDIA.mkdir(parents=True, exist_ok=True)
         _, ext = file.filename.rsplit('.', 1)

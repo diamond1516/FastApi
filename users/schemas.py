@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, validator, ValidationError
-from typing import Optional
+from typing import Optional, Any
 from fastapi import HTTPException, status, UploadFile, File
 import re
 
@@ -31,5 +31,5 @@ class SignUpModel(BaseModel):
 
 
 class Test(BaseModel):
-    avatar: UploadFile = Field()
     name: Optional[str] = Field(example='Salom')
+    file: Any

@@ -1,7 +1,10 @@
-from fastapi import HTTPException, status, APIRouter
+from fastapi import HTTPException, status, APIRouter, File, UploadFile
 from . import models, schemas
 from database import Session, engine
 from werkzeug.security import generate_password_hash, check_password_hash
+from pathlib import Path
+
+from .utils import upload_file
 
 Session = Session(bind=engine)
 
@@ -27,6 +30,7 @@ async def signup(user: schemas.SignUpModel):
     return new_user
 
 
-@auth_router.post("test/", status_code=status.HTTP_201_CREATED, response_model=schemas.Test)
-async def test(test_: schemas.SignUpModel):
-    pass
+@auth_router.post("/test", status_code=status.HTTP_201_CREATED)
+async def test(file: UploadFile = File(...)):
+    await upload_file(file)
+    return {'msg': "salom"}

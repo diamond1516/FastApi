@@ -4,7 +4,7 @@ from database import Session, engine
 from werkzeug.security import generate_password_hash, check_password_hash
 from pathlib import Path
 
-from .utils import upload_file
+from helpers import upload_file
 
 Session = Session(bind=engine)
 

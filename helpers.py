@@ -9,6 +9,8 @@ PATH_MEDIA = Path('media')
 
 
 async def upload_file(file: UploadFile = File(...), upload_dir=''):
+    upload_dir = upload_dir.replace('/', '')
+
     try:
         PATH_MEDIA.mkdir(parents=True, exist_ok=True)
         _, ext = file.filename.rsplit('.', 1)
@@ -23,6 +25,6 @@ async def upload_file(file: UploadFile = File(...), upload_dir=''):
         file_path = PATH_MEDIA / new_file
         with file_path.open("wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
-        return new_file
+        return f'/{new_file}'
     finally:
         file.file.close()

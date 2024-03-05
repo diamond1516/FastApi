@@ -1,12 +1,12 @@
 from fastapi import HTTPException, status, APIRouter, File, UploadFile
 from . import models, schemas
-from database import Session, engine
+from database import SessionLocal, engine
 from werkzeug.security import generate_password_hash, check_password_hash
 from pathlib import Path
 
 from helpers import upload_file
 
-Session = Session(bind=engine)
+Session = SessionLocal(bind=engine)
 
 auth_router = APIRouter(
     prefix="/auth"

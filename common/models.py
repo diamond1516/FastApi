@@ -1,4 +1,4 @@
-from database import Base, Session, engine
+from database import Base, SessionLocal, engine
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, String, ForeignKey, Text
 from sqlalchemy.orm import relationship
 
@@ -8,7 +8,7 @@ class Category(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(255), index=True)
     image = Column(String(255), nullable=True)
-    product = relationship('Product', back_populates='category')
+    products = relationship('Product', back_populates='category')
 
 
 class Product(Base):

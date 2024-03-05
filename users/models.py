@@ -1,4 +1,4 @@
-from database import Base, Session, engine
+from database import Base, SessionLocal, engine
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, String, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy_utils.types import ChoiceType

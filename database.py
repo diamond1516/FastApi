@@ -5,6 +5,7 @@ engine = create_engine(
     'postgresql+psycopg2://fastapi:fastapi@localhost:5432/fastapi',
     echo=True
 )
-Session = sessionmaker()
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 Base = declarative_base()
 
